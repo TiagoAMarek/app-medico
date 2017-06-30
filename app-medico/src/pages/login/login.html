@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary">Usuário</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary">Senha</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div padding>
+    <button ion-button block>Entrar</button>
+    <button margin-top ion-button block color="danger" (click)="irCadastro()">Não possuo cadastro</button>
+  </div>
+</ion-content>
