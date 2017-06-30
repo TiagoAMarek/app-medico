@@ -11,6 +11,20 @@ import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { AuthProvider } from '../providers/auth/auth';
 
+// AF 2
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+// AF2 Settings
+const firebaseConfig = {
+  apiKey: "AIzaSyBrnQp_nlUJdE2nEUkNctTBlbblI4e75W0",
+  authDomain: "healthhelper-f4d1c.firebaseapp.com",
+  databaseURL: "https://healthhelper-f4d1c.firebaseio.com",
+  projectId: "healthhelper-f4d1c",
+  storageBucket: "healthhelper-f4d1c.appspot.com",
+  messagingSenderId: "1053972456544"
+};
+
 @NgModule({
   declarations: [
     MyApp,
