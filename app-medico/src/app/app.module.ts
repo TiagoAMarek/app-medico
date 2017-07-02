@@ -7,8 +7,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 
 // pages
-import { LoginPage } from '../pages/login/login';
+import { LoginPage } from './../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
+import { HomePageModule } from '../pages/home/home.module';
+
 import { AuthProvider } from '../providers/auth/auth';
 
 // AF 2
@@ -33,7 +35,10 @@ const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+    HomePageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
