@@ -40,7 +40,7 @@ export class LoginPage {
         this.navCtrl.setRoot(MenuPage);
       }, error => {
         this.loading.dismiss().then( () => {
-          let alert = this.alertCtrl.create({
+          this.alertCtrl.create({
             message: error.message,
             buttons: [
               {
@@ -48,8 +48,7 @@ export class LoginPage {
                 role: 'cancel'
               }
             ]
-          });
-          alert.present();
+          }).present();
         });
       });
 

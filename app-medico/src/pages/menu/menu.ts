@@ -21,10 +21,6 @@ export class MenuPage {
     public loadingCtrl: LoadingController
   ) {}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MenuPage');
-  }
-
   /**
    * Desloga o usuário
    * @return {void}
@@ -36,7 +32,7 @@ export class MenuPage {
     }, error => {
       console.error('Falha ao deslogar', error);
       this.loading.dismiss().then( () => {
-        let alert = this.alertCtrl.create({
+        this.alertCtrl.create({
           message: "Falha ao deslogar",
           buttons: [
             {
@@ -44,7 +40,7 @@ export class MenuPage {
               role: 'cancel'
             }
           ]
-        });
+        }).present();
       });
     });
 
