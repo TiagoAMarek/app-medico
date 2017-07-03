@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
-import {
-  NavController,
-  LoadingController,
-  Loading,
-  AlertController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, Loading, AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthProvider } from '../../providers/auth/auth';
 
-import { HomePage } from '../home/home';
+import { MenuPage } from '../menu/menu';
 import { CadastroPage } from './../cadastro/cadastro';
 
 import { EmailValidator } from '../../validators/email';
@@ -18,12 +14,16 @@ import { EmailValidator } from '../../validators/email';
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  private loginForm:FormGroup;
-  private loading:Loading;
+  private loginForm: FormGroup;
+  private loading: Loading;
 
-  constructor(public navCtrl: NavController, public authData: AuthProvider,
-  public formBuilder: FormBuilder, public alertCtrl: AlertController,
-  public loadingCtrl: LoadingController) {
+  constructor(
+    public navCtrl: NavController,
+    public authData: AuthProvider,
+    public formBuilder: FormBuilder,
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController
+  ) {
 
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
@@ -37,7 +37,7 @@ export class LoginPage {
     } else {
       this.authData.loginUser(this.loginForm.value.email, this.loginForm.value.senha)
       .then( authData => {
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(MenuPage);
       }, error => {
         this.loading.dismiss().then( () => {
           let alert = this.alertCtrl.create({

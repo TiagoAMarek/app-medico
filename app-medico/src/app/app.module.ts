@@ -10,6 +10,7 @@ import { MyApp } from './app.component';
 import { LoginPage } from './../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { HomePageModule } from '../pages/home/home.module';
+import { MenuPageModule } from '../pages/menu/menu.module';
 
 import { AuthProvider } from '../providers/auth/auth';
 
@@ -38,7 +39,8 @@ const firebaseConfig = {
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    HomePageModule
+    HomePageModule,
+    MenuPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
