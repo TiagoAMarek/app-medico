@@ -22,15 +22,15 @@ export class CadastroPage {
     public alertCtrl: AlertController
   ) {
     this.cadastroForm = formBuilder.group({
-      email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
-      senha: ['', Validators.compose([Validators.minLength(6), Validators.required])],
-      nome: ['', Validators.compose([Validators.required])],
-      crm: ['', Validators.compose([Validators.required])],
-      especialidade: ['', Validators.compose([Validators.required])],
-      estado: ['', Validators.compose([Validators.required])],
-      cidade: ['', Validators.compose([Validators.required])],
-      bairro: ['', Validators.compose([Validators.required])],
-      logradouro: ['', Validators.compose([Validators.required])],
+      email         : ['', Validators.compose([Validators.required, EmailValidator.isValid])],
+      senha         : ['', Validators.compose([Validators.minLength(6), Validators.required])],
+      nome          : ['', Validators.compose([Validators.required])],
+      crm           : ['', Validators.compose([Validators.required])],
+      especialidade : ['', Validators.compose([Validators.required])],
+      estado        : ['', Validators.compose([Validators.required])],
+      cidade        : ['', Validators.compose([Validators.required])],
+      bairro        : ['', Validators.compose([Validators.required])],
+      logradouro    : ['', Validators.compose([Validators.required])],
     });
   }
 

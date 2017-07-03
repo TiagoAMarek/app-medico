@@ -6,6 +6,8 @@
 *.log
 *.tmp
 *.tmp.*
+*.js
+*.js.*
 log.txt
 *.sublime-project
 *.sublime-workspace

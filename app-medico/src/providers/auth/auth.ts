@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FirebaseListObservable, AngularFireDatabase } from 'angularfire2/database';
 import firebase from 'firebase/app';
 
 @Injectable()
-export class AuthProvider {
+export class AuthProvider implements OnDestroy {
   medicos: FirebaseListObservable<any>;
 
   constructor(
@@ -12,6 +12,10 @@ export class AuthProvider {
     public db: AngularFireDatabase
   ) {
     this.medicos = db.list('/medicos');
+  }
+
+  ngOnDestroy(): void {
+    this.medicos.subscribe().unsubscribe();
   }
 
   /**
