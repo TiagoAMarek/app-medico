@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, LoadingController, Loading, AlertController } from 'ionic-angular';
+import { NavController, LoadingController, Loading, AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthProvider } from '../../providers/auth/auth';
-import { HomePage } from '../home/home';
+import { MenuPage } from '../menu/menu';
 import { EmailValidator } from '../../validators/email';
 
 @Component({
@@ -14,39 +14,46 @@ export class CadastroPage {
   private cadastroForm: FormGroup;
   private loading: Loading;
 
-  constructor(public nav: NavController, public authData: AuthProvider,
-    public formBuilder: FormBuilder, public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController) {
-
+  constructor(
+    public nav: NavController,
+    public authData: AuthProvider,
+    public formBuilder: FormBuilder,
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController
+  ) {
     this.cadastroForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
       senha: ['', Validators.compose([Validators.minLength(6), Validators.required])],
-      confirmarSenha: [''],
-      nome: [''],
-      crm: ['']
+      nome: ['', Validators.compose([Validators.required])],
+      crm: ['', Validators.compose([Validators.required])]
     });
   }
 
-  cadastrarUsuario(){
-    if (!this.cadastroForm.valid){
-      console.log(this.cadastroForm.value);
-    } else {
-      this.authData.signupUser(this.cadastroForm.value.email, this.cadastroForm.value.password)
+  /**
+   * Cadastro do usuário
+   * @return {void}
+   */
+  cadastrarUsuario(): void {
+    try {
+      if (!this.cadastroForm.valid) {
+        console.log(this.cadastroForm.value);
+        throw "Preencha todos os campos!";
+      }
+      this.authData.signupUser(this.cadastroForm.value)
       .then(() => {
-        this.nav.setRoot(HomePage);
-      }, (error) => {
+        this.nav.setRoot(MenuPage);
+      }, error => {
         this.loading.dismiss().then( () => {
-          var errorMessage: string = error.message;
-            let alert = this.alertCtrl.create({
-              message: errorMessage,
-              buttons: [
-                {
-                  text: "Ok",
-                  role: 'cancel'
-                }
-              ]
-            });
-          alert.present();
+          let errorMessage: string = error.message;
+          this.alertCtrl.create({
+            message: errorMessage,
+            buttons: [
+              {
+                text: "Ok",
+                role: 'cancel'
+              }
+            ]
+          }).present();
         });
       });
 
@@ -54,6 +61,17 @@ export class CadastroPage {
         dismissOnPageChange: true,
       });
       this.loading.present();
+    } catch(e) {
+      console.warn("Cadastro de usuário - ", e);
+      this.alertCtrl.create({
+        message: e,
+        buttons: [
+          {
+            text: "Ok",
+            role: 'cancel'
+          }
+        ]
+      }).present();
     }
   }
 }

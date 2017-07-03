@@ -17,6 +17,7 @@ import { AuthProvider } from '../providers/auth/auth';
 // AF 2
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 // AF2 Settings
 const firebaseConfig = {
@@ -39,6 +40,7 @@ const firebaseConfig = {
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
     HomePageModule,
     MenuPageModule
   ],
