@@ -26,17 +26,24 @@
 
       <ion-item>
         <ion-label color="primary">Especialidade</ion-label>
-        <ion-input formControlName="especialidade" type="text"></ion-input>
+        <ion-select formControlName="especialidade">
+          <ion-option  *ngFor="let item of listaEspecialidades" value="{{item.nome}}">{{item.nome}}</ion-option>
+        </ion-select>
       </ion-item>
+
 
       <ion-item>
         <ion-label color="primary">Estado</ion-label>
-        <ion-input formControlName="estado" type="text"></ion-input>
+        <ion-select formControlName="estado" (ionChange)="alterarListaMunicipios()">
+          <ion-option  *ngFor="let item of listaEstados" value="{{item}}">{{item}}</ion-option>
+        </ion-select>
       </ion-item>
 
       <ion-item>
         <ion-label color="primary">Cidade</ion-label>
-        <ion-input formControlName="cidade" type="text"></ion-input>
+        <ion-select formControlName="cidade">
+          <ion-option  *ngFor="let item of listaMunicipios" value="{{item}}">{{item}}</ion-option>
+        </ion-select>
       </ion-item>
 
       <ion-item>

@@ -3,6 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 
@@ -13,6 +14,7 @@ import { HomePageModule } from '../pages/home/home.module';
 import { MenuPageModule } from '../pages/menu/menu.module';
 
 import { AuthProvider } from '../providers/auth/auth';
+import { EstadosMunicipiosProvider } from '../providers/estados-municipios/estados-municipios';
 
 // AF 2
 import { AngularFireModule } from 'angularfire2';
@@ -42,6 +44,7 @@ const firebaseConfig = {
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     HomePageModule,
+    HttpModule,
     MenuPageModule
   ],
   bootstrap: [IonicApp],
@@ -54,7 +57,8 @@ const firebaseConfig = {
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvider
+    AuthProvider,
+    EstadosMunicipiosProvider
   ]
 })
 export class AppModule {}

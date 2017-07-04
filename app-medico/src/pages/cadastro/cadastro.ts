@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, Loading, AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import { AuthProvider } from '../../providers/auth/auth';
+import { EstadosMunicipiosProvider } from '../../providers/estados-municipios/estados-municipios';
 import { MenuPage } from '../menu/menu';
 import { EmailValidator } from '../../validators/email';
 
@@ -13,13 +15,19 @@ import { EmailValidator } from '../../validators/email';
 export class CadastroPage {
   private cadastroForm: FormGroup;
   private loading: Loading;
+  private listaEspecialidades: any[] = [];
+  private listaEstados: any[] = [];
+  private listaMunicipios: any[] = [];
 
   constructor(
     public nav: NavController,
     public authData: AuthProvider,
+    public emData: EstadosMunicipiosProvider,
     public formBuilder: FormBuilder,
     public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public db: AngularFireDatabase
+
   ) {
     this.cadastroForm = formBuilder.group({
       email         : ['', Validators.compose([Validators.required, EmailValidator.isValid])],
@@ -28,9 +36,21 @@ export class CadastroPage {
       crm           : ['', Validators.compose([Validators.required])],
       especialidade : ['', Validators.compose([Validators.required])],
       estado        : ['', Validators.compose([Validators.required])],
-      cidade        : ['', Validators.compose([Validators.required])],
+      cidade        : [{ value: '', disabled: true }, Validators.compose([Validators.required])],
       bairro        : ['', Validators.compose([Validators.required])],
       logradouro    : ['', Validators.compose([Validators.required])],
+    });
+
+    // captura a lista de estados
+    emData.getEstados()
+    .subscribe(res => {
+      this.listaEstados = Object.keys(res);
+    });
+
+    // captura a lista de especialidades
+    this.db.list('/especialidades')
+    .subscribe(res => {
+      this.listaEspecialidades = res;
     });
   }
 
@@ -78,5 +98,18 @@ export class CadastroPage {
         ]
       }).present();
     }
+  }
+
+  /**
+   * Altera a lista de municípios de acordo com o estado
+   * @return {void}
+   */
+  alterarListaMunicipios() {
+    this.cadastroForm.controls.cidade.disable();
+    this.emData.getCidades(this.cadastroForm.value.estado)
+    .subscribe(res => {
+      this.cadastroForm.controls.cidade.enable();
+      this.listaMunicipios = Object.keys(res);
+    });
   }
 }
