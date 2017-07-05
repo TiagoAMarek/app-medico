@@ -48,9 +48,9 @@ export class AuthProvider {
           email         : data.email,
           nome          : data.nome,
           crm           : data.crm,
-          especialidade : data.especialidade,
-          estado        : data.estado,
-          cidade        : data.cidade,
+          especialidade : data.especialidade.toUpperCase(),
+          estado        : data.estado.toUpperCase(),
+          cidade        : data.cidade.toUpperCase(),
           bairro        : data.bairro,
           logradouro    : data.logradouro,
           uid           : authRes.uid
