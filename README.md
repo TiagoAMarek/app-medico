@@ -18,3 +18,4 @@ sudo docker-compose up install_node_modules
 ```
 sudo docker-compose up serve
 ```
+O app estará disponível para teste em `localhost:8100`
