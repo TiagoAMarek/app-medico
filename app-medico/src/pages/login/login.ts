@@ -72,6 +72,7 @@ export class LoginPage {
 
         this.medicos = this.medicos.subscribe(res => {
           console.log(res);
+          window.localStorage.setItem('uid', res[0].uid);
           if(res.length === 0) {
             console.warn('Você não tem permissão para acessar este recurso');
             this.alertError('Você não tem permissão para acessar este recurso');

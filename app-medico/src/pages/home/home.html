@@ -1,15 +1,21 @@
 <ion-header>
-
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>
-      Agenda do médico
-    </ion-title>
+    <ion-title>Solictações de consulta</ion-title>
   </ion-navbar>
-
 </ion-header>
+
 <ion-content padding>
-  <h1>Home page</h1>
+  <ion-card *ngFor="let item of solicitacoes">
+    <ion-card-header>
+      <h1>{{item.nome}}</h1>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>{{item.email}}</strong><p>
+      <p>{{item.mensagem}}<p>
+    </ion-card-content>
+  </ion-card>
+  <p *ngIf="solicitacoes.length === 0" text-center>Nenhuma solicitação!</p>
 </ion-content>

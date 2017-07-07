@@ -33,6 +33,7 @@ export class AuthProvider {
    * @return {firebase.Promise<any>}
    */
   logoutUser(): firebase.Promise<any> {
+    window.localStorage.removeItem('uid');
     return this.afAuth.auth.signOut();
   }
 
@@ -44,6 +45,7 @@ export class AuthProvider {
   signupUser(data: any): firebase.Promise<any> {
     return this.afAuth.auth.createUserWithEmailAndPassword(data.email, data.senha)
       .then(authRes => {
+        window.localStorage.setItem('uid', authRes.uid);
         this.medicos.push({
           email         : data.email,
           nome          : data.nome,
